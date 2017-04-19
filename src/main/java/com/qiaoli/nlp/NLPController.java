@@ -20,33 +20,24 @@ public class NLPController {
     }
 
     @GetMapping("/analyse/{text}")
-    public String analyse(@PathVariable String text) {
+    public String analyse(@PathVariable String text) throws IOException {
 
         // Instantiates a client
-        Sentiment sentiment;
-        StringBuilder sb;
-        try {
-            LanguageServiceClient language = LanguageServiceClient.create();
-            // The text to analyze
-            Document doc = Document.newBuilder()
-                    .setContent(text).setType(Type.PLAIN_TEXT).build();
+        LanguageServiceClient language = LanguageServiceClient.create();
+        // The text to analyze
+        Document doc = Document.newBuilder()
+                .setContent(text).setType(Type.PLAIN_TEXT).build();
 
-            // Detects the sentiment of the text
-            AnalyzeSentimentResponse dummy = language.analyzeSentiment(doc);
+        // Detects the sentiment of the text
 
-            sentiment = dummy.getDocumentSentiment();
+        Sentiment sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
 
-            System.out.println(text + text);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error";
-        }
+        System.out.println(text + text);
 
-        sb = new StringBuilder();
-        sb.append("Text: ").append(text).append("\n");
-        sb.append("Sentiment: ").append(sentiment.getScore()).append(sentiment.getMagnitude());
+        String sb = "Text: " + text + "\n" +
+                "Sentiment: " + sentiment.getScore() + sentiment.getMagnitude();
 
-        return sb.toString();
+        return sb;
     }
 
     @GetMapping("/test/{text}")
