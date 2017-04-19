@@ -2,17 +2,22 @@ package com.qiaoli.nlp;
 
 import com.google.cloud.language.spi.v1.LanguageServiceClient;
 
-import com.google.cloud.language.v1.AnalyzeSentimentResponse;
-import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.*;
 import com.google.cloud.language.v1.Document.Type;
-import com.google.cloud.language.v1.Sentiment;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * @author Lu Fangjian
+ */
 @RestController
 public class NLPController {
+
+    @Autowired
+    private NLPService nlpService;
 
     @RequestMapping("/")
     public String home() {
@@ -22,13 +27,9 @@ public class NLPController {
     @GetMapping("/analyse/{text}")
     public String analyse(@PathVariable String text) throws IOException {
 
-        // Instantiates a client
         LanguageServiceClient language = LanguageServiceClient.create();
-        // The text to analyze
         Document doc = Document.newBuilder()
                 .setContent(text).setType(Type.PLAIN_TEXT).build();
-
-        // Detects the sentiment of the text
 
         Sentiment sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
 
@@ -38,12 +39,6 @@ public class NLPController {
                 "Sentiment: " + sentiment.getScore() + sentiment.getMagnitude();
 
         return sb;
-    }
-
-    @GetMapping("/test/{text}")
-    public @ResponseBody
-    Foo test(@PathVariable String text) {
-        return new Foo(1, text);
     }
 
     /**

@@ -11,7 +11,7 @@
   limitations under the License.
 */
 
-package com.qiaoli.nlp;
+package com.qiaoli.sample;
 
 // [START language_quickstart]
 // Imports the Google Cloud client library
@@ -21,7 +21,7 @@ import com.google.cloud.language.v1.Document;
 import com.google.cloud.language.v1.Document.Type;
 import com.google.cloud.language.v1.Sentiment;
 
-public class QuickstartSample {
+public class NaturalLanguageAPISample {
     public static void main(String... args) throws Exception {
         // Instantiates a client
         LanguageServiceClient language = LanguageServiceClient.create();
