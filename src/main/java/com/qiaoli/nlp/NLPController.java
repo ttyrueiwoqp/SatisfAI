@@ -1,10 +1,7 @@
 package com.qiaoli.nlp;
 
-import com.google.cloud.language.spi.v1.LanguageServiceClient;
-
-import com.google.cloud.language.v1.*;
-import com.google.cloud.language.v1.Document.Type;
-
+import com.qiaoli.nlp.dto.QnAnsDto;
+import com.qiaoli.nlp.dto.QnSimilarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,21 +21,24 @@ public class NLPController {
         return "Hello World!";
     }
 
+    @GetMapping("/init")
+    public void init() {
+        nlpService.initDB();
+    }
+
+    @PostMapping("/QnAns")
+    public boolean createQnAns(@RequestBody QnAnsDto qnAnsDto) {
+        return nlpService.createQnAns(qnAnsDto);
+    }
+
+    @PostMapping("/QnSimilar")
+    public boolean createQnAns(@RequestBody QnSimilarDto qnSimilarDto) {
+        return nlpService.createQnSimilar(qnSimilarDto);
+    }
+
     @GetMapping("/analyse/{text}")
     public String analyse(@PathVariable String text) throws IOException {
-
-        LanguageServiceClient language = LanguageServiceClient.create();
-        Document doc = Document.newBuilder()
-                .setContent(text).setType(Type.PLAIN_TEXT).build();
-
-        Sentiment sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
-
-        System.out.println(text + text);
-
-        String sb = "Text: " + text + "\n" +
-                "Sentiment: " + sentiment.getScore() + sentiment.getMagnitude();
-
-        return sb;
+        return nlpService.analyse(text);
     }
 
     /**
