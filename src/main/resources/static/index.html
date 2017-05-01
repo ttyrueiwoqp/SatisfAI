@@ -1,10 +1,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Satisf AI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Get your greeting <a href="/greeting">here</a></p>
+
+<div id="query"></div>
+<label for="queryStr">Enter query here</label>
+<input id="queryStr" type="text"/>
+
+<button id="queryButton">Search</button>
+
+<div id="faq">
+    <div>Answer: <span id="ansText"></span></div>
+    <div>Matched Question: <span id="matchedQnText"></span></div>
+    <div>Main Question: <span id="mainQnText"></span></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+
+<script src="./js/satisfai.js"></script>
+
 </body>
 </html>

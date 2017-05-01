@@ -40,8 +40,8 @@ public class NLPService {
         return nlpDao.insertQnGroupDto(qnGroupDto);
     }
 
-    public List<FaqEntity> findByQnText(String qnText) {
-        return nlpDao.findByQnText(qnText);
+    public List<FaqEntity> findByQueryStr(String queryStr) {
+        return nlpDao.findByQueryStr(queryStr);
     }
 
     public String analyse(String text) throws IOException {

@@ -129,7 +129,7 @@ public class NLPDao {
                 ).build());
     }
 
-    public List<FaqEntity> findByQnText(String qnText) {
+    public List<FaqEntity> findByQueryStr(String queryStr) {
 
         BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
@@ -143,7 +143,7 @@ public class NLPDao {
 
         QueryRequest queryRequest =
                 QueryRequest.newBuilder(sql)
-                        .addNamedParameter("qn_text", QueryParameterValue.string(qnText))
+                        .addNamedParameter("qn_text", QueryParameterValue.string(queryStr))
                         .setUseLegacySql(false)
                         .build();
 
@@ -176,7 +176,7 @@ public class NLPDao {
 
             for (List<FieldValue> row : result.iterateAll()) {
                 Iterator<FieldValue> it = row.iterator();
-                faqEntity.setQnText(qnText);
+                faqEntity.setQueryStr(queryStr);
                 faqEntity.setMatchedQnId(it.next().getStringValue());
                 faqEntity.setMatchedQnText(it.next().getStringValue());
                 faqEntity.setQnGroupId(it.next().getStringValue());

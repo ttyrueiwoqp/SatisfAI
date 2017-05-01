@@ -5,7 +5,7 @@ package com.satisfai.nlp.dto;
  */
 public class FaqEntity {
 
-    private String qnText;
+    private String queryStr;
     private String matchedQnId;
     private String matchedQnText;
     private String qnGroupId;
@@ -13,12 +13,12 @@ public class FaqEntity {
     private String mainQnId;
     private String mainQnText;
 
-    public String getQnText() {
-        return qnText;
+    public String getQueryStr() {
+        return queryStr;
     }
 
-    public void setQnText(String qnText) {
-        this.qnText = qnText;
+    public void setQueryStr(String queryStr) {
+        this.queryStr = queryStr;
     }
 
     public String getMatchedQnId() {

@@ -40,17 +40,18 @@ public class NLPController {
         return "Data init";
     }
 
-    @GetMapping("/faq/{qnText}")
-    public @ResponseBody
-    List<FaqEntity> findByQnText(@PathVariable String qnText) {
-        return nlpService.findByQnText(qnText);
-    }
-
-//    @PostMapping("/faq")
+//    @GetMapping("/faq/{qnText}")
 //    public @ResponseBody
-//    FaqEntity findByQnText(@RequestBody String qnText) {
-//        return nlpService.findByQnText(qnText);
+//    List<FaqEntity> findByQueryStr(@PathVariable String qnText) {
+//        return nlpService.findByQueryStr(qnText);
 //    }
+
+    @PostMapping("/query")
+    public @ResponseBody
+    List<FaqEntity> findByQueryStr(@RequestBody String queryStr) {
+        System.out.println(queryStr);
+        return nlpService.findByQueryStr(queryStr);
+    }
 
     @PostMapping("/qnAns")
     public @ResponseBody
@@ -75,7 +76,7 @@ public class NLPController {
      * App Engine health checking</a> requires responding with 200 to {@code /_ah/health}.
      */
     @RequestMapping("/_ah/health")
-    public String healthy() {
+    public @ResponseBody String healthy() {
         // Message body required though ignored
         return "Still surviving.";
     }
