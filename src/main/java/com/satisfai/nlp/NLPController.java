@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Lu Fangjian
@@ -41,7 +42,7 @@ public class NLPController {
 
     @GetMapping("/faq/{qnText}")
     public @ResponseBody
-    FaqEntity findByQnText(@PathVariable String qnText) {
+    List<FaqEntity> findByQnText(@PathVariable String qnText) {
         return nlpService.findByQnText(qnText);
     }
 

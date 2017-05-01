@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,7 +40,7 @@ public class NLPService {
         return nlpDao.insertQnGroupDto(qnGroupDto);
     }
 
-    public FaqEntity findByQnText(String qnText) {
+    public List<FaqEntity> findByQnText(String qnText) {
         return nlpDao.findByQnText(qnText);
     }
 

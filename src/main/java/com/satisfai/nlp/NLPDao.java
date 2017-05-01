@@ -7,10 +7,7 @@ import com.satisfai.nlp.dto.QnAnsDto;
 import com.satisfai.nlp.dto.QnGroupDto;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,14 +90,8 @@ public class NLPDao {
 
     }
 
-    public boolean insertQnAnsDto(QnAnsDto qnAnsDto) {
+    public boolean insert(InsertAllRequest request) {
         BigQuery bigQuery = BigQueryOptions.getDefaultInstance().getService();
-
-        InsertAllRequest request = InsertAllRequest.newBuilder(
-                SATISFAI_NLP_DATASET,
-                FAQ_QN_ANS_TABLE,
-                Mapper.qnAnsDtoToRow(qnAnsDto)
-        ).build();
 
         InsertAllResponse response = bigQuery.insertAll(request);
         if (response.hasErrors()) {
@@ -108,60 +99,37 @@ public class NLPDao {
         }
 
         return response.hasErrors();
+    }
+
+    public boolean insertQnAnsDto(QnAnsDto qnAnsDto) {
+        return insertQnAnsDtos(Collections.singletonList(qnAnsDto));
     }
 
     public boolean insertQnAnsDtos(List<QnAnsDto> qnAnsDtos) {
-        BigQuery bigQuery = BigQueryOptions.getDefaultInstance().getService();
 
-        InsertAllRequest request = InsertAllRequest.newBuilder(
-                SATISFAI_NLP_DATASET,
-                FAQ_QN_ANS_TABLE,
-                qnAnsDtos.stream().map(Mapper::qnAnsDtoToRow).collect(Collectors.toList())
-        ).build();
-
-        InsertAllResponse response = bigQuery.insertAll(request);
-        if (response.hasErrors()) {
-            System.out.println(response.getInsertErrors());
-        }
-
-        return response.hasErrors();
+        return insert(
+                InsertAllRequest.newBuilder(
+                        SATISFAI_NLP_DATASET,
+                        FAQ_QN_ANS_TABLE,
+                        qnAnsDtos.stream().map(Mapper::qnAnsDtoToRow).collect(Collectors.toList())
+                ).build());
     }
 
     public boolean insertQnGroupDto(QnGroupDto qnGroupDto) {
-        BigQuery bigQuery = BigQueryOptions.getDefaultInstance().getService();
-
-        InsertAllRequest request = InsertAllRequest.newBuilder(
-                SATISFAI_NLP_DATASET,
-                FAQ_QN_GROUP_TABLE,
-                Mapper.qnGroupDtoToRow(qnGroupDto)
-        ).build();
-
-        InsertAllResponse response = bigQuery.insertAll(request);
-        if (response.hasErrors()) {
-            System.out.println(response.getInsertErrors());
-        }
-
-        return response.hasErrors();
+        return insertQnGroupDtos(Collections.singletonList(qnGroupDto));
     }
 
     public boolean insertQnGroupDtos(List<QnGroupDto> qnGroupDtos) {
-        BigQuery bigQuery = BigQueryOptions.getDefaultInstance().getService();
 
-        InsertAllRequest request = InsertAllRequest.newBuilder(
-                SATISFAI_NLP_DATASET,
-                FAQ_QN_GROUP_TABLE,
-                qnGroupDtos.stream().map(Mapper::qnGroupDtoToRow).collect(Collectors.toList())
-        ).build();
-
-        InsertAllResponse response = bigQuery.insertAll(request);
-        if (response.hasErrors()) {
-            System.out.println(response.getInsertErrors());
-        }
-
-        return response.hasErrors();
+        return insert(
+                InsertAllRequest.newBuilder(
+                        SATISFAI_NLP_DATASET,
+                        FAQ_QN_GROUP_TABLE,
+                        qnGroupDtos.stream().map(Mapper::qnGroupDtoToRow).collect(Collectors.toList())
+                ).build());
     }
 
-    public FaqEntity findByQnText(String qnText) {
+    public List<FaqEntity> findByQnText(String qnText) {
 
         BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
@@ -202,9 +170,10 @@ public class NLPDao {
 
         QueryResult result = response.getResult();
 
-        FaqEntity faqEntity = null;
+        List<FaqEntity> faqEntities = new ArrayList<>();
         while (result != null) {
-            faqEntity = new FaqEntity();
+            FaqEntity faqEntity = new FaqEntity();
+
             for (List<FieldValue> row : result.iterateAll()) {
                 Iterator<FieldValue> it = row.iterator();
                 faqEntity.setQnText(qnText);
@@ -214,12 +183,13 @@ public class NLPDao {
                 faqEntity.setAnsText(it.next().getStringValue());
                 faqEntity.setMainQnId(it.next().getStringValue());
                 faqEntity.setMainQnText(it.next().getStringValue());
-
             }
+            faqEntities.add(faqEntity);
+
             result = result.getNextPage();
         }
 
-        return faqEntity;
+        return faqEntities;
     }
 
 }
