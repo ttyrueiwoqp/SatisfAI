@@ -1,4 +1,4 @@
-package com.qiaoli.sample;
+package com.satisfai.sample;
 
 import com.google.cloud.bigquery.BigQuery;
 import com.google.cloud.bigquery.BigQueryOptions;

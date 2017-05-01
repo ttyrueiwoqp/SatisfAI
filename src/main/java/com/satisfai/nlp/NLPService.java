@@ -1,10 +1,11 @@
-package com.qiaoli.nlp;
+package com.satisfai.nlp;
 
 import com.google.cloud.language.spi.v1.LanguageServiceClient;
 import com.google.cloud.language.v1.Document;
 import com.google.cloud.language.v1.Sentiment;
-import com.qiaoli.nlp.dto.QnAnsDto;
-import com.qiaoli.nlp.dto.QnSimilarDto;
+import com.satisfai.nlp.dto.FaqEntity;
+import com.satisfai.nlp.dto.QnAnsDto;
+import com.satisfai.nlp.dto.QnGroupDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +25,23 @@ public class NLPService {
         nlpDao.initDB();
     }
 
+    public void initData() {
+        nlpDao.initData();
+    }
+
     public boolean createQnAns(QnAnsDto qnAnsDto) {
-        qnAnsDto.setId(UUID.randomUUID().toString());
+        qnAnsDto.setQnGroupId(UUID.randomUUID().toString());
         return nlpDao.insertQnAnsDto(qnAnsDto);
     }
 
-    public boolean createQnSimilar(QnSimilarDto qnSimilarDto) {
-        qnSimilarDto.setId(UUID.randomUUID().toString());
-        return nlpDao.insertQnSimilar(qnSimilarDto);
+    public boolean createQnGroup(QnGroupDto qnGroupDto) {
+        qnGroupDto.setQnGroupId(UUID.randomUUID().toString());
+        return nlpDao.insertQnGroupDto(qnGroupDto);
     }
 
+    public FaqEntity findByQnText(String qnText) {
+        return nlpDao.findByQnText(qnText);
+    }
 
     public String analyse(String text) throws IOException {
         LanguageServiceClient language = LanguageServiceClient.create();
