@@ -25,7 +25,8 @@ public class Converter {
 
     // TODO To run a new file, comment off the previous file and add the new file
 //    private static final String FILE_NAME = "20170524_001841_1495577921643_cs_na_desk.output";
-    private static final String FILE_NAME = "20170524_003039_1495578639692_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_003039_1495578639692_cs_na_desk.output";
+    private static final String FILE_NAME = "20170524_004307_1495579387893_cs_na_desk.output";
 
     // TODO Go to Google Cloud console > Access Control > Authorization, add your IP there
     private static final String url = "jdbc:postgresql://35.188.61.177:5432/groupon_2016";
