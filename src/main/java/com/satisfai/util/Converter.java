@@ -19,15 +19,19 @@ import java.sql.SQLException;
 public class Converter {
 
     private static final int BATCH_LIMIT = 500;
+
+    // TODO Change this to your folder
     private static final String FILE_PATH = "C:\\Users\\lvfan\\Downloads\\";
 
     // TODO To run a new file, comment off the previous file and add the new file
 //    private static final String FILE_NAME = "20170524_001841_1495577921643_cs_na_desk.output";
     private static final String FILE_NAME = "20170524_003039_1495578639692_cs_na_desk.output";
 
+    // TODO Go to Google Cloud console > Access Control > Authorization, add your IP there
     private static final String url = "jdbc:postgresql://35.188.61.177:5432/groupon_2016";
     private static final String user = "postgres";
-    // TODO Enter password in your local
+
+    // TODO Enter password here, never commit this, I'll make this an input later
     private static final String password = "";
 
     private static final Gson gson = new GsonBuilder()
