@@ -29,7 +29,9 @@ public class Converter {
 //    private static final String FILE_NAME = "20170524_004307_1495579387893_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_005620_1495580180385_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_015329_1495583609819_cs_na_desk.output";
-    private static final String FILE_NAME = "Entries with issues.json";
+//    private static final String FILE_NAME = "Entries with issues.json";
+//    private static final String FILE_NAME = "20170524_094526_1495611926571_cs_na_desk.output";
+    private static final String FILE_NAME = "20170524_100012_1495612812111_cs_na_desk.output";
 
     // TODO Go to Google Cloud console > Access Control > Authorization, add your IP there
     private static final String url = "jdbc:postgresql://35.188.61.177:5432/groupon_2016";
@@ -61,9 +63,6 @@ public class Converter {
                 GrouponTickets tickets = gson.fromJson(reader, GrouponTickets.class);
                 i++;
 
-//                if (i < BATCH_LIMIT * 440) {
-//                    continue;
-//                }
                 buildPrepareStatement(ps, tickets);
                 ps.addBatch();
                 if (i % BATCH_LIMIT == 0) {
@@ -110,7 +109,7 @@ public class Converter {
         }
     }
 
-    //    private static final String DELETE = "DELETE from groupon_tickets where tickets_id = ?";
+    private static final String DELETE = "DELETE FROM groupon_tickets where tickets_id = ?";
     private static final String INSERT = "INSERT INTO groupon_tickets " +
             "(tickets_id," +
             " tickets_assignee_id," +
@@ -153,7 +152,8 @@ public class Converter {
             " metric_sets_solved_at," +
             " metric_sets_status_updated_at," +
             " metric_sets_updated_at)" +
-            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
+            " ON CONFLICT DO NOTHING";
 
     private static void buildPrepareStatement(PreparedStatement ps, GrouponTickets tickets) throws SQLException {
         int idx = 0;
