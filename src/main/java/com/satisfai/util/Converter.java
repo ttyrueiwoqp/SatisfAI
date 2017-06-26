@@ -26,7 +26,10 @@ public class Converter {
     // TODO To run a new file, comment off the previous file and add the new file
 //    private static final String FILE_NAME = "20170524_001841_1495577921643_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_003039_1495578639692_cs_na_desk.output";
-    private static final String FILE_NAME = "20170524_004307_1495579387893_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_004307_1495579387893_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_005620_1495580180385_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_015329_1495583609819_cs_na_desk.output";
+    private static final String FILE_NAME = "Entries with issues.json";
 
     // TODO Go to Google Cloud console > Access Control > Authorization, add your IP there
     private static final String url = "jdbc:postgresql://35.188.61.177:5432/groupon_2016";
@@ -48,7 +51,7 @@ public class Converter {
         try {
             con = DriverManager.getConnection(url, user, password);
             con.setAutoCommit(true);
-            ps = con.prepareStatement(SQL);
+            ps = con.prepareStatement(INSERT);
 
             JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(FILE_PATH + FILE_NAME)));
             reader.beginArray();
@@ -56,16 +59,39 @@ public class Converter {
             int i = 0;
             while (reader.hasNext()) {
                 GrouponTickets tickets = gson.fromJson(reader, GrouponTickets.class);
+                i++;
+
+//                if (i < BATCH_LIMIT * 440) {
+//                    continue;
+//                }
                 buildPrepareStatement(ps, tickets);
                 ps.addBatch();
-                i++;
                 if (i % BATCH_LIMIT == 0) {
-                    ps.executeBatch();
-                    System.out.println("Executed Batch " + (i / BATCH_LIMIT));
+                    try {
+                        System.out.println("Executing Batch " + (i / BATCH_LIMIT));
+                        long st = System.currentTimeMillis();
+                        ps.executeBatch();
+                        System.out.println("Executed Batch " + (i / BATCH_LIMIT) + " in " + (System.currentTimeMillis() - st) + "ms");
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     ps.clearBatch();
                 }
                 ps.clearParameters();
             }
+
+            if (i % BATCH_LIMIT != 0) {
+                try {
+                    System.out.println("Executing Final Batch");
+                    long st = System.currentTimeMillis();
+                    ps.executeBatch();
+                    System.out.println("Executed Final Batch in " + (System.currentTimeMillis() - st) + "ms");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                ps.clearBatch();
+            }
+
             reader.close();
 
         } catch (SQLException ex) {
@@ -73,8 +99,6 @@ public class Converter {
         } finally {
             try {
                 if (ps != null) {
-                    ps.executeBatch();
-                    System.out.println("Executed Final Batch");
                     ps.close();
                 }
                 if (con != null) {
@@ -86,7 +110,8 @@ public class Converter {
         }
     }
 
-    private static final String SQL = "INSERT INTO groupon_tickets " +
+    //    private static final String DELETE = "DELETE from groupon_tickets where tickets_id = ?";
+    private static final String INSERT = "INSERT INTO groupon_tickets " +
             "(tickets_id," +
             " tickets_assignee_id," +
             " tickets_created_at," +
@@ -141,7 +166,7 @@ public class Converter {
         ps.setString(++idx, tickets.getTicketsCustomField_24112003());
         ps.setString(++idx, tickets.getTicketsCustomField_27311858());
         ps.setString(++idx, tickets.getTicketsCustomField_505895());
-        ps.setString(++idx, tickets.getTicketsDescription());
+        ps.setString(++idx, tickets.getTicketsDescription().replaceAll("\\x00", ""));
         ps.setLong(++idx, tickets.getTicketsGroupId());
         ps.setLong(++idx, tickets.getTicketsRequesterId());
         ps.setString(++idx, tickets.getTicketsSatisfactionRatingScore());
