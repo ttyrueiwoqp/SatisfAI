@@ -30,14 +30,48 @@ public class Converter {
 //    private static final String FILE_NAME = "20170524_005620_1495580180385_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_015329_1495583609819_cs_na_desk.output";
 //    private static final String FILE_NAME = "Entries with issues.json";
+
+    // 21-30 done
+//    private static final String FILE_NAME = "20170524_045716_1495594636320_cs_na_desk.output";
+    private static final String FILE_NAME = "20170524_051129_1495595489764_cs_na_desk.output";//not done yet
+//    private static final String FILE_NAME = "20170524_052553_1495596353200_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_054014_1495597214075_cs_na_desk.output";//not done yet
+//    private static final String FILE_NAME = "20170524_055431_1495598071150_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_060846_1495598926652_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_062303_1495599783691_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_063720_1495600640524_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_065133_1495601493442_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_070549_1495602349586_cs_na_desk.output";//not done yet
+
+    // 31-40 done
+//    private static final String FILE_NAME = "20170524_071959_1495603199713_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_073418_1495604058434_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_074836_1495604916982_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_080258_1495605778822_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_081710_1495606630251_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_083142_1495607502519_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_084619_1495608379145_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_090105_1495609265668_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_091552_1495610152971_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_093041_1495611041689_cs_na_desk.output";
+
+    // 41-50 done except Invalid 20170524_162603_1495635963984_cs_na_desk.output
 //    private static final String FILE_NAME = "20170524_094526_1495611926571_cs_na_desk.output";
-    private static final String FILE_NAME = "20170524_100012_1495612812111_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_100012_1495612812111_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_101450_1495613690457_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_162603_1495635963984_cs_na_desk.output";  // Too many invalid entries with "metric item is missing - ZD API BUG", skipped
+//    private static final String FILE_NAME = "20170524_164010_1495636810822_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_165418_1495637658866_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_170736_1495638456345_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_172111_1495639271054_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_173232_1495639952457_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_173801_1495640281955_cs_na_desk.output";
 
     // TODO Go to Google Cloud console > Access Control > Authorization, add your IP there
     private static final String url = "jdbc:postgresql://35.188.61.177:5432/groupon_2016";
     private static final String user = "postgres";
 
-    // TODO Enter password here, never commit this, I'll make this an input later
+    // TODO Enter password here, never commit this
     private static final String password = "";
 
     private static final Gson gson = new GsonBuilder()
