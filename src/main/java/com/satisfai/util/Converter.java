@@ -24,24 +24,41 @@ public class Converter {
     private static final String FILE_PATH = "C:\\Users\\lvfan\\Downloads\\";
 
     // TODO To run a new file, comment off the previous file and add the new file
+    // 1-10 done
 //    private static final String FILE_NAME = "20170524_001841_1495577921643_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_003039_1495578639692_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_004307_1495579387893_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_005620_1495580180385_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_011053_1495581053694_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_012503_1495581903320_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_013918_1495582758729_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_015329_1495583609819_cs_na_desk.output";
-//    private static final String FILE_NAME = "Entries with issues.json";
+//    private static final String FILE_NAME = "20170524_020748_1495584468813_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_022156_1495585316409_cs_na_desk.output";
+
+    // 11-20 done
+//    private static final String FILE_NAME = "20170524_023602_1495586162084_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_025009_1495587009340_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_030415_1495587855991_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_031824_1495588704718_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_033226_1495589546558_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_034625_1495590385680_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_040035_1495591235652_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_041448_1495592088826_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_042849_1495592929653_cs_na_desk.output";
+//    private static final String FILE_NAME = "20170524_044300_1495593780589_cs_na_desk.output";
 
     // 21-30 done
 //    private static final String FILE_NAME = "20170524_045716_1495594636320_cs_na_desk.output";
-    private static final String FILE_NAME = "20170524_051129_1495595489764_cs_na_desk.output";//not done yet
+//    private static final String FILE_NAME = "20170524_051129_1495595489764_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_052553_1495596353200_cs_na_desk.output";
-//    private static final String FILE_NAME = "20170524_054014_1495597214075_cs_na_desk.output";//not done yet
+//    private static final String FILE_NAME = "20170524_054014_1495597214075_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_055431_1495598071150_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_060846_1495598926652_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_062303_1495599783691_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_063720_1495600640524_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_065133_1495601493442_cs_na_desk.output";
-//    private static final String FILE_NAME = "20170524_070549_1495602349586_cs_na_desk.output";//not done yet
+//    private static final String FILE_NAME = "20170524_070549_1495602349586_cs_na_desk.output";
 
     // 31-40 done
 //    private static final String FILE_NAME = "20170524_071959_1495603199713_cs_na_desk.output";
@@ -59,7 +76,7 @@ public class Converter {
 //    private static final String FILE_NAME = "20170524_094526_1495611926571_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_100012_1495612812111_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_101450_1495613690457_cs_na_desk.output";
-//    private static final String FILE_NAME = "20170524_162603_1495635963984_cs_na_desk.output";  // Too many invalid entries with "metric item is missing - ZD API BUG", skipped
+    private static final String FILE_NAME = "20170524_162603_1495635963984_cs_na_desk.output";  // Too many invalid entries with "metric item is missing - ZD API BUG", skipped
 //    private static final String FILE_NAME = "20170524_164010_1495636810822_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_165418_1495637658866_cs_na_desk.output";
 //    private static final String FILE_NAME = "20170524_170736_1495638456345_cs_na_desk.output";
