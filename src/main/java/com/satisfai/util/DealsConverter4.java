@@ -21,11 +21,11 @@ import java.util.UUID;
 /**
  * @author Lu Fangjian
  */
-public class DealsConverter {
+public class DealsConverter4 {
 
     private static final int BATCH_LIMIT = 1000;
-    private static final int CURRENT_MAX_ID = 0; // After disconnect and reconnect, change this by `select max(id) from groupon_deals_email`
-    private static final int NEXT_MAX_ID = 20000000;
+    private static final int CURRENT_MAX_ID = 60000000; // After disconnect and reconnect, change this by `select max(id) from groupon_deals_email`
+    private static final int NEXT_MAX_ID = 80000000;
 
     // TODO Change this to your folder
     private static final String FILE_PATH = "/Users/fangjian/Downloads/";
